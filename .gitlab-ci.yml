@@ -5,10 +5,9 @@ stages:
 
 # Визначення змінних середовища
 variables:
-  DATABASE_URL = "sqlite:///./test.db"
-  PYTHON_VERSION: "3.10"
+  DATABASE_URL: sqlite:///db/test.db  # Потрібно вказати шлях до вашої бази даних
+  PYTHON_VERSION: "3.10"  # Встановлення версії Python
 
-# Встановлення залежностей
 before_script:
   - python -m pip install --upgrade pip
   - pip install -r requirements.txt
