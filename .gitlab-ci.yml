@@ -1,0 +1,42 @@
+stages:
+  - build
+  - test
+  - deploy
+
+# Визначення змінних середовища
+variables:
+  DATABASE_URL = "sqlite:///./test.db"
+  PYTHON_VERSION: "3.10"
+
+# Встановлення залежностей
+before_script:
+  - python -m pip install --upgrade pip
+  - pip install -r requirements.txt
+  - pip install cachetools  # Встановлення бібліотеки cachetools
+
+# Створення та налаштування середовища
+build:
+  stage: build
+  script:
+    - python -m venv venv
+    - source venv/bin/activate
+    - pip install -r requirements.txt
+  tags:
+    - docker
+
+# Тестування коду
+test:
+  stage: test
+  script:
+    - python -m unittest discover -s tests  # Виконання тестів з вашої тестової директорії
+  tags:
+    - docker
+
+# Деплой на сервер
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying application to production server..."
+    # Додавання команд для деплою
+  tags:
+    - docker
